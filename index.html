@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Book</title>
+
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            background-color: antiquewhite;
+        }
+
+        .main-container{
+           width: 500px;
+            margin: 40px auto;
+            border: 2px solid black;
+            border-radius: 10px;
+        }
+
+        .heading{
+            font-size: 25px;
+            text-align: center;
+            margin: 15px;
+            font-family: cursive;
+            font-weight:bold;
+        }
+
+        
+        .add-student-name{
+            display: block;
+            text-align: center;
+            margin: 10px auto;
+            padding: 7px;
+            width: 280px;
+            border: 2px solid black;
+            border-radius: 10px;
+
+            &::placeholder{
+                font-size: 15px;
+                font-family: cursive;
+                font-weight: 800;
+               
+            }
+        }
+        .container-1{
+            border-bottom: 2px solid black;
+        }
+
+        .btn-container{
+            display: block;
+            margin: 10px auto;
+            width: fit-content;
+            
+        }
+
+        .btn{
+         width: 100px;
+         padding: 7px;
+         margin: 12px;
+         border-radius: 10px;
+         border: none;
+         background-color: black;
+         color: antiquewhite;
+         cursor: pointer;
+        }
+
+        .student-card{
+            width: 250px;
+            border: 2px solid black;
+            border-radius: 15px;
+            padding: 5px;
+            margin: 15px auto;
+            font-size: 17px;
+            font-family: cursive;
+            background-color:azure;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="main-container">
+        <h1 class="heading">Student Book</h1>
+        <div class="container-1">
+        <input type="text" id="add-student-name-1" class="add-student-name" placeholder="Enter Student Name">
+        <div class="btn-container">
+         <button class="btn" onclick="removeStudent()">Remove</button>
+        <button class="btn" onclick="addStudent()">Add</button>
+       
+        </div>
+        </div>
+
+        <div id="container-2"></div>
+
+    </div>
+
+
+    <script>
+         function getRandomEmoji() {
+            const emojis = ['😇','🥰','🤩','😘','😍','🥳','😎','🙃','🤗','👻','💀'];
+            const min = 0;
+            const max = emojis.length - 1;
+            const randomIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+
+            return emojis[randomIndex]
+        }
+        const students = [
+            "Rushikesh",
+        ]
+        function loadStudents() {
+            const studentsContainer = document.getElementById("container-2")
+
+            studentsContainer.innerHTML = ""
+
+            for (let i = 0; i < students.length; i++) {
+                studentsContainer.innerHTML += `<div class='student-card'>  ${i + 1}) ${getRandomEmoji()} ${students[i]
+                    }</div>`;
+
+            }
+
+        }
+        loadStudents()
+        const studentInput = document.getElementById("add-student-name-1");
+        function addStudent(){
+            students.push(studentInput.value);
+            studentInput.value = "";
+            loadStudents();
+
+        }
+        function removeStudent() {
+            
+            const studentIndex = students.indexOf(studentInput.value);
+            studentInput.value = "";
+            students.splice(studentIndex, 1);
+            loadStudents();
+        }
+    </script>
+
+</body>
+</html>
